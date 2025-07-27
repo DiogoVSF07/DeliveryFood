@@ -1,0 +1,35 @@
+{
+	"info": {
+		"_postman_id": "c097be98-7ecb-4a39-9aea-e147a56400c0",
+		"name": "ApiFoodDelivery",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "47097186"
+	},
+	"item": [
+		{
+			"name": "store",
+			"item": [
+				{
+					"name": "searchById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/store/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"store",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
