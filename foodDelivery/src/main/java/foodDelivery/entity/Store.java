@@ -1,15 +1,13 @@
 package foodDelivery.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
-@Getter
-@Setter
+@Data
 @Table(name = "store")
 public class Store implements Serializable {
 
