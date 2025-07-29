@@ -13,6 +13,8 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
+
 @Service
 public class StoreService {
 
@@ -20,6 +22,9 @@ public class StoreService {
     private StoreRepository storeRepository;
 
     public Store storeById(Integer idStore){
+        if (idStore == null || idStore <= 0) {
+            throw new IllegalArgumentException ("Informe um ID válido.");
+        }
         return storeRepository.findById(idStore)
                 .orElseThrow(() -> new EntityNotFoundException("Loja não encontrada com id:" + idStore));
     }

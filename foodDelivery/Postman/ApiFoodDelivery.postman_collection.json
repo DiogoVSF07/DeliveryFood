@@ -15,7 +15,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/store/5",
+							"raw": "http://localhost:8080/store/id?id=-10",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -23,7 +23,42 @@
 							"port": "8080",
 							"path": [
 								"store",
-								"5"
+								"id"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "-10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "registerStore",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"taxId\": \"12345678000199\",\r\n  \"tradeName\": \"Loja Exemplo\",\r\n  \"corporateName\": \"Loja Exemplo LTDA\",\r\n  \"street\": \"Rua das Flores\",\r\n  \"number\": \"123\",\r\n  \"district\": \"Centro\",\r\n  \"city\": \"São Paulo\",\r\n  \"state\": \"SP\",\r\n  \"zipCode\": \"01001000\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/store/registerStore",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"store",
+								"registerStore"
 							]
 						}
 					},

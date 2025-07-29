@@ -15,8 +15,8 @@ public class StoreController {
     @Autowired
     private StoreService storeService;
 
-    @GetMapping("/{id}")
-    public Store searchById(@PathVariable Integer id){
+    @GetMapping("/id")
+    public Store searchById(@RequestParam Integer id) {
         return storeService.storeById(id);
     }
 
