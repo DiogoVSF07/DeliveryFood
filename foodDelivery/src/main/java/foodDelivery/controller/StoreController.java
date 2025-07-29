@@ -1,5 +1,6 @@
 package foodDelivery.controller;
 
+import foodDelivery.dto.response.RegisterResponse;
 import foodDelivery.entity.Store;
 import foodDelivery.form.RegisterStoreForm;
 import foodDelivery.service.StoreService;
@@ -19,9 +20,9 @@ public class StoreController {
         return storeService.storeById(id);
     }
 
-//    @PostMapping
-//    public Store registerStore(@RequestBody @Valid RegisterStoreForm form){
-//
-//    }
-
+    @PostMapping("/registerStore")
+    public RegisterResponse registerStore(@RequestBody @Valid RegisterStoreForm form) {
+        Store store = storeService.registerStore(form);
+        return new RegisterResponse("Cadastro realizado com sucesso", store.getId());
+    }
 }
