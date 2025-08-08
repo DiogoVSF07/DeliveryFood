@@ -2,25 +2,43 @@ package foodDelivery.AWS;
 
 import com.amazonaws.serverless.proxy.model.AwsProxyRequest;
 import com.amazonaws.serverless.proxy.model.AwsProxyResponse;
-import com.amazonaws.serverless.proxy.spring.SpringBootProxyHandlerBuilder;
+import com.amazonaws.serverless.proxy.spring.SpringBootLambdaContainerHandler;
 import com.amazonaws.services.lambda.runtime.Context;
-import com.amazonaws.services.lambda.runtime.RequestStreamHandler;
+import com.amazonaws.services.lambda.runtime.RequestHandler;
 import foodDelivery.FoodDeliveryApplication;
 
-import java.io.InputStream;
-import java.io.OutputStream;
+//public class StreamLambdaHandler implements RequestHandler<AwsProxyRequest, AwsProxyResponse> {
+//
+//    private static final SpringBootLambdaContainerHandler<AwsProxyRequest, AwsProxyResponse> handler;
+//
+//    static {
+//        try {
+//            handler = SpringBootLambdaContainerHandler.getAwsProxyHandler(FoodDeliveryApplication.class);
+//        } catch (Exception e) {
+//            throw new RuntimeException("Erro ao inicializar o handler", e);
+//        }
+//    }
+//
+//    @Override
+//    public AwsProxyResponse handleRequest(AwsProxyRequest awsProxyRequest, Context context) {
+//        return handler.proxy(awsProxyRequest, context);
+//    }
+//}
 
-public class StreamLambdaHandler implements RequestStreamHandler {
+public class StreamLambdaHandler implements RequestHandler<AwsProxyRequest, AwsProxyResponse> {
+    private static final SpringBootLambdaContainerHandler<AwsProxyRequest, AwsProxyResponse> handler;
 
-    private static final com.amazonaws.serverless.proxy.RequestHandler<AwsProxyRequest, AwsProxyResponse> handler =
-            new SpringBootProxyHandlerBuilder<AwsProxyRequest>()
-                    .defaultProxy()
-                    .asyncInit()
-                    .springBootApplication(FoodDeliveryApplication.class)
-                    .build();
+    static {
+        try {
+            handler = SpringBootLambdaContainerHandler.getAwsProxyHandler(FoodDeliveryApplication.class);
+            handler.initialize();
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to initialize Spring Boot handler", e);
+        }
+    }
 
     @Override
-    public void handleRequest(InputStream inputStream, OutputStream outputStream, Context context) {
-        handler.proxyStream(inputStream, outputStream, context);
+    public AwsProxyResponse handleRequest(AwsProxyRequest request, Context context) {
+        return handler.proxy(request, context);
     }
 }
